@@ -1,0 +1,27 @@
+WSGIPythonHome /usr/src/django1.3_env/
+WSGIPythonPath /usr/src/Easy-Route-Admin/
+
+<VirtualHost *:80>
+
+ServerAdmin admin@41.221.20.108
+ServerName 41.221.20.108
+ServerAlias 41.221.20.108
+
+# Log Files
+LogLevel warn
+ErrorLog /var/log/apache2/41.221.20.108_error.log
+CustomLog /var/log/apache2/41.221.20.108.log common
+
+#Aliases for admin media
+Alias /static/admin/ /usr/src/django1.3_env/lib/python2.6/site-packages/django/contrib/admin/media/
+
+#Alias for wsgi requests
+WSGIScriptAlias / /usr/src/Easy-Route-Admin/deploy/apache.wsgi
+
+
+<Directory /usr/src/Easy-Route-Admin/deploy/>
+Order allow,deny
+Allow from all
+</Directory>
+
+</VirtualHost>
